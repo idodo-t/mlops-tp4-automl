@@ -6,8 +6,8 @@
 | Manuel (TP2) | 0.8669 | ~30 min | 2.31 s | 0 (poste local) | Moyenne/Bonne | Total |
 | FLAML 60 s | 0.8409 | ~5 min | 60 s (123 essais) | 0 (poste local) | Moyenne/Basse | Total |
 | Vertex AI AutoML | non mesure | ~1 h (compte, facturation, quotas, 1er job) - estimation | non mesure | 21.252 $/node-hour d'entrainement tabulaire (Vertex AI pricing, consulte le 22/10/2026) | Bonne (Vertex Explainable AI, indisponible sur modele exporte) | Partielle : export vers Cloud Storage + Docker, CPU x86 avec AVX (doc Vertex AI, consultee le 22/10/2026) |
-| SageMaker Autopilot | non mesure | ~1 h (compte, facturation, quotas, 1er job) - estimation | non mesure | Canvas : 1.9 $/h de session + entrainement 2.03-4.89 $/h (SageMaker Canvas pricing, consulte le 22/10/2026) | Bonne (3 notebooks generes : exploration, candidats, model insights) | A verifier : notebooks reproductibles, pas de page d'export trouvee |
-| Azure Automated ML | non mesure | ~1 h (compte, facturation, quotas, 1er job) - estimation | non mesure | Pas de frais pour le service, seulement calcul et stockage (Azure ML pricing, consulte le 22/10/2026) | Bonne (importances locales et globales via le SDK d'interpretabilite) | A verifier (doc Azure ML, a completer) |
+| SageMaker Autopilot | non mesure | ~1 h (compte, facturation, quotas, 1er job) - estimation | non mesure | Canvas : 1.9 $/h de session + entrainement 2.03-4.89 $/h (SageMaker Canvas pricing, consulte le 22/10/2026) | Bonne (3 notebooks generes : exploration, candidats, model insights) | Partielle : artefacts du modele dans S3 et conteneurs d'inference, deploiement documente dans SageMaker ; pas de procedure d'export hors AWS trouvee (doc SageMaker, consultee le 22/10/2026) |
+| Azure Automated ML | non mesure | ~1 h (compte, facturation, quotas, 1er job) - estimation | non mesure | Pas de frais pour le service, seulement calcul et stockage (Azure ML pricing, consulte le 22/10/2026) | Bonne (importances locales et globales via le SDK d'interpretabilite) | Possible : les modeles AutoML peuvent etre telecharges au format ONNX depuis le studio ou le SDK (exemple documente pour la vision, non verifie pour le tabulaire) (doc Azure ML, consultee le 22/10/2026) |
 
 ## Commentaire (5 lignes)
 
@@ -16,3 +16,5 @@
 3. FLAML local : justifie pour obtenir vite un bon modele (0.84 en 10 s) sur un poste local, sans cout ni donnees envoyees hors de l'entreprise.
 4. Plateformes managees : justifiees quand les donnees sont deja dans le cloud, ou qu'il faut deployer, versionner et superviser a l'echelle ; attention au cout et au verrouillage.
 5. Dans tous les cas, l'AutoML ne remplace pas le jugement : la fuite du bloc D (F1 1.0 puis 0.0) n'a ete vue par aucun outil.
+
+
