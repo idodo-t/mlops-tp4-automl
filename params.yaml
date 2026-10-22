@@ -1,0 +1,3 @@
+automl:
+  budget: 30        # secondes de recherche
+  seed: 42

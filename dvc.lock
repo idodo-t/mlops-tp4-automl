@@ -1,0 +1,38 @@
+schema: '2.0'
+stages:
+  donnees:
+    cmd: python donnees.py
+    deps:
+    - path: donnees.py
+      hash: md5
+      md5: 3fee5bf676dc63adea6ae30a2c464dca
+      size: 904
+    outs:
+    - path: data/transactions.csv
+      hash: md5
+      md5: cf9f6f86c141e7df32c61715c493483f
+      size: 85902
+  automl:
+    cmd: python src/automl_dvc.py
+    deps:
+    - path: data/transactions.csv
+      hash: md5
+      md5: cf9f6f86c141e7df32c61715c493483f
+      size: 85902
+    - path: src/automl_dvc.py
+      hash: md5
+      md5: 5988226f671ff563872d8a6626210515
+      size: 993
+    params:
+      params.yaml:
+        automl.budget: 30
+        automl.seed: 42
+    outs:
+    - path: models/automl.pkl
+      hash: md5
+      md5: 8f6b8ca14231c2007031d869a23db75b
+      size: 44180
+    - path: reports/metrics_automl.json
+      hash: md5
+      md5: fc1af31f7c0d2fcc67ec6aa69b2e33c7
+      size: 42

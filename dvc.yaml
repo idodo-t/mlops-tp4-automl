@@ -1,0 +1,20 @@
+stages:
+  donnees:
+    cmd: python donnees.py
+    deps:
+      - donnees.py
+    outs:
+      - data/transactions.csv
+  automl:
+    cmd: python src/automl_dvc.py
+    deps:
+      - data/transactions.csv
+      - src/automl_dvc.py
+    params:
+      - automl.budget
+      - automl.seed
+    outs:
+      - models/automl.pkl
+    metrics:
+      - reports/metrics_automl.json:
+          cache: false
